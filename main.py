@@ -55,7 +55,7 @@ def create_order(order_items: List[OrderItem]):
                 validated_items.append(item)
             elif response.status_code == 404:
                 raise HTTPException(
-                    status_code=status.HTTP_404_BAD_REQUEST,
+                    status_code=status.HTTP_400_BAD_REQUEST,
                     detail=f"Product with id {item.product_id} not found."
                 )
             else:
