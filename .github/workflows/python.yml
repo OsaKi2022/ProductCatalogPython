@@ -4,9 +4,9 @@
   # Тригери
   on:
     push:
-      branches: [ "master" ]
+      branches: [ "database" ]
     pull_request:
-      branches: [ "master" ]
+      branches: [ "database" ]
 
   jobs:
     build:
