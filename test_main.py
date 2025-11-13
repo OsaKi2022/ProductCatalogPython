@@ -1,9 +1,23 @@
+from unittest.mock import AsyncMock
+
 import requests
 from fastapi.testclient import TestClient
 import main
 
 # Створюємо клієнт для тестування
 client = TestClient(main.app)
+
+def setup_module():
+
+    main.database.connect = AsyncMock()
+    main.database.disconnect = AsyncMock()
+
+    main.database.execute = AsyncMock(return_value=1)
+
+    main.database.fetch_all = AsyncMock(return_value=[
+        {"id": 1, "order_id": 1, "product_id": 1, "quantity": 1},
+        {"id": 2, "order_id": 1, "product_id": 2, "quantity": 2},
+    ])
 
 def test_create_order_success(requests_mock):
     """
